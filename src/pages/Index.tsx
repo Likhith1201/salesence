@@ -39,7 +39,7 @@ const Index = () => {
   };
 
   const handleContactSales = () => {
-    window.location.href = '/contact';
+    navigate('/contact');
   };
 
   // About section features
@@ -71,6 +71,7 @@ const Index = () => {
     {
       name: t("starter"),
       price: formatPrice(40),
+      basePrice: 40,
       period: t("month"),
       yearlyPrice: `${formatPrice(400)} ${t("yearly")}`,
       yearlySave: `${t("monthsFree")} (${t("save")} ${formatPrice(80)})`,
@@ -89,6 +90,7 @@ const Index = () => {
     {
       name: t("professional"),
       price: formatPrice(100),
+      basePrice: 100,
       period: t("month"),
       yearlyPrice: `${formatPrice(1000)} ${t("yearly")}`,
       yearlySave: `${t("monthsFree")} (${t("save")} ${formatPrice(200)})`,
@@ -128,7 +130,7 @@ const Index = () => {
 
   // Privacy Policy Modal
   const PrivacyPolicyModal = () => (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4">
       <div className="bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-white/10">
         <div className="sticky top-0 bg-gray-900 border-b border-white/10 p-6 rounded-t-2xl">
           <div className="flex items-center justify-between">
@@ -228,7 +230,7 @@ const Index = () => {
           </div>
 
           {/* Quick Facts */}
-          <div className="grid grid-cols-3 gap-4 text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
             <div>
               <div className="text-2xl font-bold text-green-400">100%</div>
               <div className="text-xs text-gray-400">{t("dataEncryption")}</div>
@@ -266,7 +268,7 @@ const Index = () => {
 
   // Terms of Service Modal
   const TermsOfServiceModal = () => (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4">
       <div className="bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-white/10">
         <div className="sticky top-0 bg-gray-900 border-b border-white/10 p-6 rounded-t-2xl">
           <div className="flex items-center justify-between">
@@ -458,7 +460,7 @@ const Index = () => {
     };
 
     return (
-      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4">
         <div className="bg-gray-900 rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto border border-white/10">
           <div className="sticky top-0 bg-gray-900 border-b border-white/10 p-6 rounded-t-2xl">
             <div className="flex items-center justify-between">
@@ -496,22 +498,22 @@ const Index = () => {
             </div>
 
             {/* Quick Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-              <div className="glass-effect p-6 rounded-2xl text-center border border-green-500/20">
-                <div className="text-3xl font-bold text-green-400 mb-2">24/7</div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-12">
+              <div className="glass-effect p-4 sm:p-6 rounded-2xl text-center border border-green-500/20">
+                <div className="text-2xl sm:text-3xl font-bold text-green-400 mb-2">24/7</div>
                 <div className="text-sm text-gray-300">{t("supportAvailable")}</div>
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse mx-auto mt-2"></div>
               </div>
-              <div className="glass-effect p-6 rounded-2xl text-center border border-blue-500/20">
-                <div className="text-3xl font-bold text-blue-400 mb-2">2.1min</div>
+              <div className="glass-effect p-4 sm:p-6 rounded-2xl text-center border border-blue-500/20">
+                <div className="text-2xl sm:text-3xl font-bold text-blue-400 mb-2">2.1min</div>
                 <div className="text-sm text-gray-300">{t("avgResponseTime")}</div>
               </div>
-              <div className="glass-effect p-6 rounded-2xl text-center border border-purple-500/20">
-                <div className="text-3xl font-bold text-purple-400 mb-2">98.3%</div>
+              <div className="glass-effect p-4 sm:p-6 rounded-2xl text-center border border-purple-500/20">
+                <div className="text-2xl sm:text-3xl font-bold text-purple-400 mb-2">98.3%</div>
                 <div className="text-sm text-gray-300">{t("satisfactionRate")}</div>
               </div>
-              <div className="glass-effect p-6 rounded-2xl text-center border border-orange-500/20">
-                <div className="text-3xl font-bold text-orange-400 mb-2">10K+</div>
+              <div className="glass-effect p-4 sm:p-6 rounded-2xl text-center border border-orange-500/20">
+                <div className="text-2xl sm:text-3xl font-bold text-orange-400 mb-2">10K+</div>
                 <div className="text-sm text-gray-300">{t("questionsSolved")}</div>
               </div>
             </div>
@@ -693,21 +695,21 @@ const Index = () => {
                     {t("storyParagraph2")}
                   </p>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="glass-effect p-6 rounded-xl bg-blue-900/20 text-center border-blue-700/30">
-                    <div className="text-3xl font-bold text-blue-400">10K+</div>
+                <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                  <div className="glass-effect p-4 sm:p-6 rounded-xl bg-blue-900/20 text-center border-blue-700/30">
+                    <div className="text-2xl sm:text-3xl font-bold text-blue-400">10K+</div>
                     <div className="text-sm text-blue-300">{t("activeUsers")}</div>
                   </div>
-                  <div className="glass-effect p-6 rounded-xl bg-purple-900/20 text-center border-purple-700/30">
-                    <div className="text-3xl font-bold text-purple-400">5M+</div>
+                  <div className="glass-effect p-4 sm:p-6 rounded-xl bg-purple-900/20 text-center border-purple-700/30">
+                    <div className="text-2xl sm:text-3xl font-bold text-purple-400">5M+</div>
                     <div className="text-sm text-purple-300">{t("analysesRun")}</div>
                   </div>
-                  <div className="glass-effect p-6 rounded-xl bg-green-900/20 text-center border-green-700/30">
-                    <div className="text-3xl font-bold text-green-400">90+</div>
+                  <div className="glass-effect p-4 sm:p-6 rounded-xl bg-green-900/20 text-center border-green-700/30">
+                    <div className="text-2xl sm:text-3xl font-bold text-green-400">90+</div>
                     <div className="text-sm text-green-300">{t("uptime")}</div>
                   </div>
-                  <div className="glass-effect p-6 rounded-xl bg-orange-900/20 text-center border-orange-700/30">
-                    <div className="text-3xl font-bold text-orange-400">24/7</div>
+                  <div className="glass-effect p-4 sm:p-6 rounded-xl bg-orange-900/20 text-center border-orange-700/30">
+                    <div className="text-2xl sm:text-3xl font-bold text-orange-400">24/7</div>
                     <div className="text-sm text-orange-300">{t("support")}</div>
                   </div>
                 </div>
@@ -722,7 +724,7 @@ const Index = () => {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(139,92,246,0.1),transparent_70%)]"></div>
           </div>
 
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 overflow-visible">
             <div className="text-center mb-20">
               <div className="inline-flex items-center glass-effect rounded-full px-6 py-3 mb-6">
                 <Star className="w-5 h-5 text-purple-400 mr-2" />
@@ -738,18 +740,18 @@ const Index = () => {
               </p>
             </div>  
             
-            <div className="grid gap-8 lg:grid-cols-3 max-w-6xl mx-auto">
+            <div className="grid gap-8 sm:gap-10 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto mt-8">
               {pricingPlans.map((plan, index) => (
-                <Card 
+                <Card
                   key={plan.name}
                   className={`glass-effect border-white/10 hover:border-white/20 transition-all duration-300 hover-lift relative ${
-                    plan.popular ? 'ring-2 ring-purple-500/50 scale-105' : ''
+                    plan.popular ? 'ring-2 ring-purple-500/50 lg:scale-105' : ''
                   }`}
                 >
                   {/* Most Popular Badge */}
                   {plan.popular && (
-                    <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
-                      <div className="bg-purple-600 bg-opacity-90 text-white px-5 py-1.5 rounded-full text-sm font-semibold">
+                    <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 z-10">
+                      <div className="bg-purple-600 bg-opacity-90 text-white px-5 py-1.5 rounded-full text-sm font-semibold shadow-lg">
                         {t("mostPopular")}
                       </div>
                     </div>
@@ -801,9 +803,8 @@ const Index = () => {
 
             {/* Attractive Savings Note */}
             <div className="text-center mt-8">
-              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500/20 to-blue-500/20 px-6 py-3 rounded-full">
-                <ThumbsUp className="w-5 h-5 text-green-400" />
-                <span className="text-green-400 font-semibold">{t("getTwoMonthsFree")}</span>
+              <div className="inline-flex items-center justify-center bg-gradient-to-r from-green-500/20 to-blue-500/20 px-6 py-3 rounded-full">
+                <span className="text-green-400 font-semibold leading-none">{t("getTwoMonthsFree")}</span>
               </div>
             </div>
 
@@ -856,7 +857,7 @@ const Index = () => {
                   variant="ghost"
                   size="lg"
                   className="glass-effect hover:bg-white/10 text-white px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 w-full sm:w-auto group"
-                  onClick={() => window.open("https://www.youtube.com/embed/dQw4w9WgXcQ", "_blank")}
+                  onClick={() => alert("Video demo coming soon! Add your video URL here.")}
                 >
                   <Play className="mr-2 w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
                   {t("watchDemo")}
@@ -894,22 +895,22 @@ const Index = () => {
 
         <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8 relative z-10">
           {/* Newsletter Section */}
-          <div className="glass-effect rounded-2xl p-8 mb-12 border border-white/10 bg-gradient-to-r from-purple-900/20 to-blue-900/20">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="glass-effect rounded-2xl p-4 sm:p-6 lg:p-8 mb-12 border border-white/10 bg-gradient-to-r from-purple-900/20 to-blue-900/20">
+            <div className="grid md:grid-cols-2 gap-6 sm:gap-8 items-center">
               <div>
-                <h3 className="text-2xl font-bold text-white mb-2 flex items-center">
-                  <Mail className="w-6 h-6 mr-3 text-purple-400" />
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 flex items-center">
+                  <Mail className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 text-purple-400 flex-shrink-0" />
                   {t("stayUpdated")}
                 </h3>
-                <p className="text-gray-300">{t("getLatestInsights")}</p>
+                <p className="text-sm sm:text-base text-gray-300">{t("getLatestInsights")}</p>
               </div>
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <input
                   type="email"
                   placeholder={t("enterYourEmail")}
-                  className="flex-1 px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="flex-1 px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm sm:text-base"
                 />
-                <Button className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105">
+                <Button className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-lg transition-all duration-300 sm:hover:scale-105 whitespace-nowrap">
                   {t("subscribe")}
                 </Button>
               </div>
@@ -922,9 +923,9 @@ const Index = () => {
             <div className="lg:col-span-2">
               <div className="flex items-center space-x-3 mb-6">
                 <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl flex items-center justify-center shadow-lg">
-                  <Star className="w-7 h-7 text-white" />
+                  <Star className="w-7 h-7 text-white fill-white" />
                 </div>
-                <span className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Salesence</span>
+                <span className="text-2xl font-bold text-white">Salesence</span>
               </div>
               <p className="text-gray-300 mb-8 max-w-md text-lg leading-relaxed">
                 {t("footerDescription")}
@@ -937,18 +938,18 @@ const Index = () => {
                   {t("followUs")}
                 </h4>
                 <div className="flex space-x-3">
-                  <div className="group w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center hover:scale-110 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-blue-500/25">
+                  <a href="#" target="_blank" rel="noopener noreferrer" className="group w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center hover:scale-110 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-blue-500/25">
                     <span className="text-white font-bold text-lg group-hover:scale-110 transition-transform">f</span>
-                  </div>
-                  <div className="group w-12 h-12 bg-gradient-to-br from-sky-500 to-sky-600 rounded-xl flex items-center justify-center hover:scale-110 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-sky-500/25">
+                  </a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" className="group w-12 h-12 bg-gradient-to-br from-sky-500 to-sky-600 rounded-xl flex items-center justify-center hover:scale-110 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-sky-500/25">
                     <span className="text-white font-bold text-lg group-hover:scale-110 transition-transform">t</span>
-                  </div>
-                  <div className="group w-12 h-12 bg-gradient-to-br from-blue-700 to-blue-800 rounded-xl flex items-center justify-center hover:scale-110 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-blue-700/25">
+                  </a>
+                  <a href="https://www.linkedin.com/company/salesence/" target="_blank" rel="noopener noreferrer" className="group w-12 h-12 bg-gradient-to-br from-blue-700 to-blue-800 rounded-xl flex items-center justify-center hover:scale-110 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-blue-700/25">
                     <span className="text-white font-bold text-lg group-hover:scale-110 transition-transform">in</span>
-                  </div>
-                  <div className="group w-12 h-12 bg-gradient-to-br from-gray-700 to-gray-800 rounded-xl flex items-center justify-center hover:scale-110 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-gray-700/25">
+                  </a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" className="group w-12 h-12 bg-gradient-to-br from-gray-700 to-gray-800 rounded-xl flex items-center justify-center hover:scale-110 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-gray-700/25">
                     <span className="text-white font-bold text-lg group-hover:scale-110 transition-transform">@</span>
-                  </div>
+                  </a>
                 </div>
               </div>
 

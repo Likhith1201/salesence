@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx playwright install chromium)",
+      "Bash(node \"D:\\salesenceeee\\product-scraper\\packages\\scraper-core\\node_modules\\playwright\\cli.js\" install chromium)",
+      "Bash(pnpm.cmd list --depth=0)",
+      "Bash(set DATABASE_URL=postgresql://postgres:Emrhn.27@db.cyimsigwvzmoyvqzzcjt.supabase.co:5432/postgres?sslmode=require)",
+      "Bash(pnpm.cmd db:push)",
+      "Bash(npx prisma db push --schema=./prisma/schema.prisma)",
+      "Bash(npx prisma db push)",
+      "Bash(DATABASE_URL=\"postgresql://postgres:Emrhn.27@db.cyimsigwvzmoyvqzzcjt.supabase.co:5432/postgres?sslmode=require\" npx prisma db push)",
+      "Bash(DATABASE_URL=\"postgresql://postgres:Emrhn.27@db.cyimsigwvzmoyvqzzcjt.supabase.co:6543/postgres?pgbouncer=true\" npx prisma db push)",
+      "Bash(node test-db-connection.js)",
+      "Bash(DATABASE_URL=\"postgresql://postgres.cyimsigwvzmoyvqzzcjt:Emrhn.27@aws-0-ap-south-1.pooler.supabase.com:5432/postgres\" npx prisma db push)",
+      "Bash(pnpm.cmd dev)",
+      "Bash(pnpm.cmd build)",
+      "Bash(pnpm.cmd install)",
+      "Bash(test -f .env)",
+      "Bash(cat .env)",
+      "Bash(curl -s http://localhost:8080/health)",
+      "Bash(npx prisma generate)",
+      "Bash(curl -s \"http://localhost:8080/api/products?url=https://www.hepsiburada.com/english-home-evelina-new-bone-china-4-parca-2-kisilik-kahve-fincan-takimi-90-ml-koyu-yesil-p-HBCV00007DG7A2\")",
+      "Bash(curl -s \"http://localhost:8080/api/product?url=https://www.hepsiburada.com/english-home-evelina-new-bone-china-4-parca-2-kisilik-kahve-fincan-takimi-90-ml-koyu-yesil-p-HBCV00007DG7A2\")",
+      "Bash(curl -s -X POST http://localhost:8080/analyze -H \"Content-Type: application/json\" -d \"{\"\"url\"\":\"\"https://www.hepsiburada.com/english-home-evelina-new-bone-china-4-parca-2-kisilik-kahve-fincan-takimi-90-ml-koyu-yesil-p-HBCV00007DG7A2\"\"}\")",
+      "Bash(curl -s -X POST http://localhost:8080/analyze -H \"Content-Type: application/json\" -d \"{\"\"url\"\":\"\"https://www.trendyol.com/apple/iphone-16-128gb-beyaz-p-857296082\"\"}\")",
+      "Bash(curl -s -X POST http://localhost:8080/analyze -H \"Content-Type: application/json\" -d \"{\"\"url\"\":\"\"https://www.amazon.in/dp/B0BDJBYBSC\"\"}\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -13,6 +13,7 @@ interface PlanData {
   period: string;
   yearlyPrice: string;
   features: string[];
+  basePrice?: number; // Add base USD price for calculations
 }
 
 const Payment = () => {
@@ -42,6 +43,7 @@ const Payment = () => {
   const defaultPlan: PlanData = {
     name: t("professional"),
     price: formatPrice(100),
+    basePrice: 100,
     period: t("month"),
     yearlyPrice: formatPrice(1000),
     features: [
@@ -64,7 +66,30 @@ const Payment = () => {
 
   const getSavings = () => {
     if (billingCycle === 'yearly') {
-      return t("save") + " " + formatPrice(200);
+      // Use base price if available, otherwise parse the price string
+      let basePrice: number;
+      
+      if (currentPlan.basePrice !== undefined) {
+        // Use the base USD price
+        basePrice = currentPlan.basePrice;
+      } else {
+        // Fallback: parse from formatted price (assumes it's in the display currency)
+        // This works but may have rounding issues
+        const priceString = currentPlan.price;
+        const numericPrice = parseFloat(priceString.replace(/[^0-9.]/g, ''));
+        
+        // If Turkish and price is high, assume it's already in TRY, convert back to USD
+        if (numericPrice > 1000) {
+          basePrice = numericPrice / 32.5; // Rough conversion back
+        } else {
+          basePrice = numericPrice;
+        }
+      }
+      
+      // Savings = 2 months free (yearly is 10 months, full year would be 12)
+      const savingsInBase = basePrice * 2;
+      
+      return t("save") + " " + formatPrice(savingsInBase);
     }
     return null;
   };

@@ -31,12 +31,12 @@ export interface Suggestion {
 }
 
 const LOADING_STAGES: LoadingStage[] = [
-  { message: "Fetching product data...", progress: 15, duration: 500 },
-  { message: "Analyzing images...", progress: 35, duration: 600 },
-  { message: "Processing title and description...", progress: 55, duration: 700 },
-  { message: "Generating AI suggestions...", progress: 75, duration: 800 },
-  { message: "Finalizing analysis...", progress: 90, duration: 500 },
-  { message: "Complete!", progress: 100, duration: 300 }
+  { message: "fetchingProductData", progress: 15, duration: 500 },
+  { message: "analyzingImages", progress: 35, duration: 600 },
+  { message: "processingTitleDescription", progress: 55, duration: 700 },
+  { message: "generatingAiSuggestions", progress: 75, duration: 800 },
+  { message: "finalizingAnalysis", progress: 90, duration: 500 },
+  { message: "analysisComplete", progress: 100, duration: 300 }
 ];
 
 export const useAnalysis = () => {

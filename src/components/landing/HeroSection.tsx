@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles, Play, Star, TrendingUp, Zap, X } from "lucide-react";
+import { ArrowRight, Sparkles, Play, Star, TrendingUp, Zap } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -10,7 +10,6 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ onGetStarted }: HeroSectionProps) => {
-  const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [isBgVideoPlaying, setIsBgVideoPlaying] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -29,7 +28,7 @@ const HeroSection = ({ onGetStarted }: HeroSectionProps) => {
 
   return (
     <section
-      className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 py-20 overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-32 pb-20 overflow-hidden"
       onMouseEnter={() => setIsBgVideoPlaying(true)}
       onMouseLeave={() => setIsBgVideoPlaying(false)}
     >
@@ -88,7 +87,7 @@ const HeroSection = ({ onGetStarted }: HeroSectionProps) => {
       </motion.div>
 
       {/* Headline */}
-      <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight">
+      <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight px-4">
         <span className="text-white block">{t("heroTitle1")}</span>
         <span className="text-purple-400 block">{t("heroTitle2")}</span>
       </h1>
@@ -121,7 +120,7 @@ const HeroSection = ({ onGetStarted }: HeroSectionProps) => {
         <Button
           variant="outline"
           size="lg"
-          onClick={() => setIsVideoOpen(true)}
+          onClick={() => alert("Video demo coming soon! Add your video URL here.")}
           className="px-8 py-6 text-lg font-semibold rounded-2xl border-gray-700 text-gray-300 hover:bg-gray-800/60 backdrop-blur-sm transition-all flex items-center gap-2"
         >
           <Play className="h-5 w-5 text-purple-400" /> {t("watchDemo")}
@@ -133,7 +132,7 @@ const HeroSection = ({ onGetStarted }: HeroSectionProps) => {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6 }}
-        className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-6"
+        className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-5xl mx-auto"
       >
         {[{ icon: Star, text: t("trustedByUsers"), color: "text-yellow-400" },
           { icon: Zap, text: t("lightningFastInsights"), color: "text-pink-400" },
@@ -150,25 +149,6 @@ const HeroSection = ({ onGetStarted }: HeroSectionProps) => {
         ))}
       </motion.div>
 
-      {/* Demo Video Modal */}
-      {isVideoOpen && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-          <div className="relative bg-gray-900 rounded-2xl shadow-xl w-[90%] max-w-3xl overflow-hidden">
-            <button
-              onClick={() => setIsVideoOpen(false)}
-              className="absolute top-3 right-3 p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
-            >
-              <X className="h-5 w-5 text-white" />
-            </button>
-            <iframe
-              className="w-full h-[420px] sm:h-[480px] rounded-2xl"
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-              title="Demo Video"
-              allowFullScreen
-            ></iframe>
-          </div>
-        </div>
-      )}
     </section>
   );
 };

@@ -22,4 +22,14 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment Variables
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+
+# Translation Cache (optional - uncomment if you don't want to commit cached translations)
+# translation_cache.json

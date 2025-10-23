@@ -1,0 +1,94 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Marketplace {
+  AMAZON
+  TRENDYOL
+  HEPSIBURADA
+  OTHER
+}
+
+enum FetchStatus {
+  SUCCESS
+  BLOCKED
+  ERROR
+}
+
+model Product {
+  id            String   @id @default(uuid())
+  marketplace   Marketplace
+  productUrl    String   @unique
+  name          String
+  priceAmount   Decimal  @db.Decimal(12,2)
+  priceCurrency String
+  ratingValue   Decimal? @db.Decimal(3,2)
+  ratingCount   Int?
+  images        Json     @default("[]")
+  specs         Json?
+  categoryPath  String[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  productSellers ProductSeller[]
+  sourceRecommendations Recommendation[] @relation("SourceProduct")
+}
+
+model Seller {
+  id           String   @id @default(uuid())
+  marketplace  Marketplace
+  externalId   String
+  name         String
+  ratingValue  Decimal? @db.Decimal(3,2)
+  sellerUrl    String?
+  meta         Json?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  productSellers ProductSeller[]
+  @@unique([marketplace, externalId])
+}
+
+model ProductSeller {
+  id            String   @id @default(uuid())
+  productId     String
+  sellerId      String
+  isPrimary     Boolean  @default(false)
+  priceAmount   Decimal  @db.Decimal(12,2)
+  priceCurrency String
+  capturedAt    DateTime @default(now())
+  product    Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  seller     Seller  @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+}
+
+model Recommendation {
+  id                    String   @id @default(uuid())
+  sourceProductId       String
+  recommendedProductUrl String
+  name                  String
+  priceAmount           Decimal  @db.Decimal(12,2)
+  priceCurrency         String
+  ratingValue           Decimal  @db.Decimal(3,2)
+  ratingCount           Int?
+  imageUrl              String
+  marketplace           Marketplace
+  rank                  Int
+  capturedAt            DateTime @default(now())
+  sourceProduct     Product @relation("SourceProduct", fields: [sourceProductId], references: [id], onDelete: Cascade)
+}
+
+model FetchLog {
+  id          String   @id @default(uuid())
+  marketplace Marketplace
+  targetUrl   String
+  status      FetchStatus
+  httpStatus  Int?
+  errorCode   String?
+  message     String?
+  startedAt   DateTime @default(now())
+  endedAt     DateTime?
+  meta        Json?
+}

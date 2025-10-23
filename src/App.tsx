@@ -16,7 +16,9 @@ import Payment from './pages/Payment';
 import Profile from './pages/Profile';
 import { AuthProvider } from './contexts/AuthContext';
 import "./i18n";
-
+import  ProductDetailsPage  from "./pages/ProductDetailsPage";
+import TestTranslation from "./pages/TestTranslation";
+import { Toaster } from "sonner";
 
 
 function App() {
@@ -37,10 +39,13 @@ function App() {
                 <Route path="/careers" element={<Careers/>} />
                 <Route path="/payment" element={<Payment/>} />
                 <Route path="/profile" element={<Profile/>} />
+                <Route path="/product/:productId" element={<ProductDetailsPage />} />
+                <Route path="/test-translation" element={<TestTranslation />} />
               </Routes>
             </div>
           </Router>
         </Background>
+        <Toaster position="top-right" richColors />
       </ThemeProvider>
     </AuthProvider>
   );

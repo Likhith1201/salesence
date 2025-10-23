@@ -5,9 +5,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Search, Package, ExternalLink, AlertCircle, Sparkles, TrendingUp, ArrowLeft } from "lucide-react";
 import { validateProductUrl, extractProductInfo } from "@/utils/urlValidation";
 import { generateMockAnalysis, MockAnalysisResult } from "@/utils/mockDataGenerator";
-import { AnalysisResults } from "@/components/analysis/AnalysisResults";
+import { AnalysisResults }  from "@/components/analysis/AnalysisResults";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
+import { apiService } from "@/services/api.service";
+import { transformApiResponseToMockFormat } from "@/utils/apiTransformer";
+import { toast } from "sonner";
 
 export const DemoSection = () => {
   const { t } = useTranslation();
@@ -20,23 +23,42 @@ export const DemoSection = () => {
 
   const handleAnalyze = async () => {
     setValidationError("");
-    
+
     const validation = validateProductUrl(url);
     if (!validation.isValid) {
       setValidationError(t(validation.errorKey || 'enterValidUrl'));
       return;
     }
-    
+
     setIsAnalyzing(true);
-    
-    const productInfo = extractProductInfo(url);
-    const loadingTime = 2000 + Math.random() * 1000;
-    
-    setTimeout(() => {
+
+    try {
+      // Try to use the real backend API
+      const apiResponse = await apiService.analyzeProduct(url);
+
+      // Transform API response to match existing UI format
+      const transformedAnalysis = transformApiResponseToMockFormat(apiResponse, url);
+      setAnalysisResult(transformedAnalysis);
+
+      toast.success(t("analysisCompletedSuccess"), {
+        description: t("foundRecommendations", { count: apiResponse.recommendations.length }),
+      });
+
+    } catch (error: any) {
+      console.error("API Error:", error);
+
+      // Fallback to mock data if API fails
+      const productInfo = extractProductInfo(url);
       const mockAnalysis = generateMockAnalysis(url, productInfo.marketplace, productInfo.platform);
       setAnalysisResult(mockAnalysis);
+
+      // Show warning that mock data is being used
+      toast.warning(t("usingDemoMode"), {
+        description: error.message || t("backendUnavailable"),
+      });
+    } finally {
       setIsAnalyzing(false);
-    }, loadingTime);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,7 +104,7 @@ export const DemoSection = () => {
               <span className="text-sm font-medium text-gray-300">{t("tryItFree")}</span>
             </div>
             
-            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
               {t("seeTheMagic")}
             </h2>
             
@@ -93,7 +115,7 @@ export const DemoSection = () => {
 
           {/* Demo Input */}
           <Card className="glass-effect border-white/10 shadow-2xl mb-12">
-            <CardContent className="p-8">
+            <CardContent className="p-4 sm:p-6 lg:p-8">
               <div className="space-y-6">
                 <div className="relative">
                   <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
@@ -126,7 +148,7 @@ export const DemoSection = () => {
                   {isAnalyzing ? (
                     <>
                       <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white mr-3" />
-                      Analyzing your product...
+                      {t("analyzingYourProduct")}
                     </>
                   ) : (
                     <>
@@ -143,7 +165,7 @@ export const DemoSection = () => {
                   </div>
                 )}
 
-                <div className="flex items-center justify-center space-x-6 text-sm text-gray-400">
+                <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-400">
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
                     <span>{t("freeAnalysis")}</span>
@@ -166,15 +188,15 @@ export const DemoSection = () => {
             <div className="space-y-8">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-2">Analysis Complete</h3>
-                  <p className="text-gray-300">Here's what our AI discovered about your product</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">{t('analysisComplete')}</h3>
+                  <p className="text-gray-300">{t('analysisAIDiscovered')}</p>
                 </div>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   onClick={handleReset}
                   className="glass-effect border-white/20 text-white hover:bg-white/10"
                 >
-                  Analyze Another Product
+                  {t('analyzeAnotherProduct')}
                 </Button>
               </div>
               <AnalysisResults analysis={analysisResult} />

@@ -11,14 +11,14 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useTranslation } from "react-i18next";
-import { 
-  Eye, 
-  EyeOff, 
-  CheckCircle2, 
-  Sparkles, 
-  Brain, 
-  Target, 
-  Rocket, 
+import {
+  Eye,
+  EyeOff,
+  CheckCircle2,
+  Sparkles,
+  Brain,
+  Target,
+  Rocket,
   Home,
   BarChart3,
   Users,
@@ -30,7 +30,8 @@ import {
   Mail,
   Lock,
   Key,
-  ChevronRight
+  ChevronRight,
+  ArrowLeft
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -94,12 +95,6 @@ export default function Login() {
       description: t("performanceDesc"),
       icon: BarChart3,
       link: "/#performance"
-    },
-    {
-      title: t("careerPaths"),
-      description: t("careerPathsDesc"),
-      icon: Briefcase,
-      link: "/careers"
     }
   ];
 
@@ -107,7 +102,6 @@ export default function Login() {
     { name: t("home"), path: "/", icon: Home },
     { name: t("features"), path: "/#features", icon: Zap },
     { name: t("about"), path: "/#about", icon: Users },
-    { name: t("careers"), path: "/careers", icon: Briefcase }
   ];
 
   // Rotate through inspirational thoughts
@@ -291,6 +285,23 @@ export default function Login() {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="max-w-md w-full relative z-10 mt-12"
       >
+        {/* Go Back Button */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mb-4"
+        >
+          <Button
+            onClick={() => navigate("/")}
+            variant="ghost"
+            className="text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-300 group"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" />
+            {t("backToHome") || "Back to Home"}
+          </Button>
+        </motion.div>
+
         <Card className="border border-gray-800 bg-gray-950/80 backdrop-blur-md shadow-xl rounded-2xl overflow-hidden">
           {/* Card Header Gradient */}
           <div className="bg-gradient-to-r from-purple-900/30 via-indigo-900/30 to-pink-900/30 p-1">

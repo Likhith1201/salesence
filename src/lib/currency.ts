@@ -1,3 +1,4 @@
+import { useMemo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 // Static exchange rate for demonstration purposes
@@ -9,11 +10,15 @@ const EXCHANGE_RATES = {
 export const useCurrency = () => {
   const { t, i18n } = useTranslation();
 
-  const formatPrice = (amount: number): string => {
-    const isturkish = i18n.language === "tr";
-    const symbol = t("currencySymbol");
+  // Memoize to ensure recalculation when language changes
+  const isTurkish = useMemo(() => i18n.language === "tr", [i18n.language]);
+  const currencySymbol = useMemo(() => t("currencySymbol"), [t, i18n.language]);
+  const currencyCode = useMemo(() => t("currency"), [t, i18n.language]);
 
-    if (isturkish) {
+  const formatPrice = useCallback((amount: number): string => {
+    const symbol = isTurkish ? "₺" : "$";
+
+    if (isTurkish) {
       const tryAmount = amount * EXCHANGE_RATES.USD_TO_TRY;
       return `${symbol}${tryAmount.toLocaleString('tr-TR', {
         minimumFractionDigits: 0,
@@ -25,17 +30,17 @@ export const useCurrency = () => {
         maximumFractionDigits: 0
       })}`;
     }
-  };
+  }, [isTurkish]);
 
-  const convertPrice = (usdAmount: number): number => {
-    const isturkish = i18n.language === "tr";
-    return isturkish ? usdAmount * EXCHANGE_RATES.USD_TO_TRY : usdAmount;
-  };
+  const convertPrice = useCallback((usdAmount: number): number => {
+    return isTurkish ? usdAmount * EXCHANGE_RATES.USD_TO_TRY : usdAmount;
+  }, [isTurkish]);
 
   return {
     formatPrice,
     convertPrice,
-    currencySymbol: t("currencySymbol"),
-    currencyCode: t("currency"),
+    currencySymbol,
+    currencyCode,
+    isTurkish,
   };
 };

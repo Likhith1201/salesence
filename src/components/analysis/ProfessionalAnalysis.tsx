@@ -38,6 +38,7 @@ import {
 } from "lucide-react";
 import { useAnalysis } from "@/hooks/useAnalysis";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "./AnalysisAnimations.css";
 
 export const ProfessionalAnalysis = () => {
@@ -51,6 +52,8 @@ export const ProfessionalAnalysis = () => {
     formatTimeRemaining,
     setState
   } = useAnalysis();
+
+  const { t } = useTranslation();
 
   const {
     url,
@@ -214,10 +217,10 @@ export const ProfessionalAnalysis = () => {
           <div className="text-center space-y-8 max-w-2xl mx-auto">
             <div className="space-y-4">
               <h2 className="text-3xl font-bold text-white">
-                Analyzing Your Product
+                {t("analyzingYourProductTitle")}
               </h2>
               <p className="text-lg text-gray-300">
-                Our AI is examining every detail to provide you with actionable insights
+                {t("aiExaminingDetails")}
               </p>
             </div>
 
@@ -241,7 +244,7 @@ export const ProfessionalAnalysis = () => {
                   {/* Status Message */}
                   <div className="text-center">
                     <p className="text-lg font-medium text-white animate-pulse">
-                      {currentStage?.message || "Initializing..."}
+                      {currentStage?.message ? t(currentStage.message) : t("initializing")}
                     </p>
                   </div>
 
@@ -278,15 +281,15 @@ export const ProfessionalAnalysis = () => {
             <div className="text-center space-y-4">
               <div className="inline-flex items-center glass-effect rounded-full px-6 py-3">
                 <CheckCircle className="w-5 h-5 text-green-400 mr-2" />
-                <span className="text-sm font-medium text-gray-300">Analysis Complete</span>
+                <span className="text-sm font-medium text-gray-300">{t('analysisComplete')}</span>
               </div>
-              
+
               <h2 className="text-3xl font-bold text-white">
-                Here's what our AI discovered
+                {t('analysisAIDiscovered')}
               </h2>
-              
+
               <p className="text-lg text-gray-300">
-                Actionable insights to optimize your product listing
+                {t('analysisActionableInsights')}
               </p>
             </div>
 
@@ -465,8 +468,8 @@ export const ProfessionalAnalysis = () => {
                 <div className="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Clock className="h-6 w-6 text-blue-400" />
                 </div>
-                <h4 className="font-semibold text-white mb-2">Analysis completed in 2.3 seconds</h4>
-                <p className="text-sm text-gray-400">Lightning-fast AI processing</p>
+                <h4 className="font-semibold text-white mb-2">{t("analysisCompletedTime", { time: "2.3" })}</h4>
+                <p className="text-sm text-gray-400">{t("lightningFastProcessing")}</p>
               </Card>
 
               <Card className="glass-effect border-white/10 text-center p-6">

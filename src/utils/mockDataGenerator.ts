@@ -1,19 +1,35 @@
-
 export interface MockAnalysisResult {
   id: string;
   url: string;
   marketplace: string;
   platform: string;
   product: {
+    id?: string;
     name: string;
     price: string;
+    priceAmount?: number;
+    currency?: string;
     originalPrice?: string;
+    originalPriceAmount?: number;
     imageUrl: string;
+    images?: string[];
     imageQuality: number;
     category: string;
     rating: number;
     reviewCount: number;
   };
+  recommendations?: Array<{
+    id: string;
+    name: string;
+    price: string;
+    priceAmount?: number;
+    currency?: string;
+    originalPriceAmount?: number;
+    rating: number;
+    reviewCount: number;
+    image: string;
+    productUrl: string;
+  }>;
   analysis: {
     titleSuggestions: string[];
     descriptionSuggestions: string[];
@@ -23,6 +39,8 @@ export interface MockAnalysisResult {
     overallScore: number;
     competitorAnalysis: {
       averagePrice: string;
+      averagePriceAmount?: number;
+      currency?: string;
       pricePosition: 'above' | 'below' | 'competitive';
       marketShare: number;
     };
@@ -54,7 +72,7 @@ const productNames = [
 ];
 
 const categories = [
-  "Electronics", "Home & Kitchen", "Health & Fitness", 
+  "Electronics", "Home & Kitchen", "Health & Fitness",
   "Office Products", "Sports & Outdoors", "Beauty & Personal Care"
 ];
 
@@ -116,10 +134,30 @@ export const generateMockAnalysis = (url: string, marketplace: string, platform:
   const category = categories[Math.floor(Math.random() * categories.length)];
   const price = (Math.random() * 200 + 10).toFixed(2);
   const originalPrice = Math.random() > 0.6 ? (parseFloat(price) * 1.2).toFixed(2) : undefined;
-  const imageQuality = Math.floor(Math.random() * 15) + 85; // 85-99%
+
+  // More realistic random scores with wider range
+  const imageQuality = Math.floor(Math.random() * 40) + 60; // 60-99%
   const rating = Math.round((Math.random() * 2 + 3) * 10) / 10; // 3.0-5.0
-  const reviewCount = Math.floor(Math.random() * 5000) + 100;
-  const overallScore = Math.floor(Math.random() * 20) + 75; // 75-94%
+  const reviewCount = Math.floor(Math.random() * 5000) + 10; // 10-5000 (not always 100+)
+
+  // Calculate score more realistically based on these metrics
+  let overallScore = 0;
+
+  // Image quality contribution (0-25)
+  overallScore += Math.floor(imageQuality * 0.25);
+
+  // Rating contribution (0-30)
+  overallScore += Math.floor((rating / 5.0) * 30);
+
+  // Review count contribution (0-20)
+  const reviewScore = Math.min(reviewCount / 500, 1) * 20;
+  overallScore += Math.floor(reviewScore);
+
+  // Random variation (0-25)
+  overallScore += Math.floor(Math.random() * 25);
+
+  // Ensure reasonable range: 40-100
+  overallScore = Math.max(40, Math.min(100, overallScore));
 
   return {
     id: Math.random().toString(36).substr(2, 9),
@@ -129,7 +167,10 @@ export const generateMockAnalysis = (url: string, marketplace: string, platform:
     product: {
       name: productName,
       price: `$${price}`,
+      priceAmount: parseFloat(price),
+      currency: 'USD',
       originalPrice: originalPrice ? `$${originalPrice}` : undefined,
+      originalPriceAmount: originalPrice ? parseFloat(originalPrice) : undefined,
       imageUrl: "/placeholder.svg",
       imageQuality,
       category,
@@ -145,6 +186,8 @@ export const generateMockAnalysis = (url: string, marketplace: string, platform:
       overallScore,
       competitorAnalysis: {
         averagePrice: `$${(parseFloat(price) * (0.8 + Math.random() * 0.4)).toFixed(2)}`,
+        averagePriceAmount: parseFloat(price) * (0.8 + Math.random() * 0.4),
+        currency: 'USD',
         pricePosition: Math.random() > 0.5 ? 'competitive' : Math.random() > 0.5 ? 'above' : 'below',
         marketShare: Math.floor(Math.random() * 30) + 15
       }

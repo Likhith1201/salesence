@@ -732,11 +732,11 @@ export default function CareersPage() {
                 <LifeAtSalesenceSection />
 
                 {/* Culture Section */}
-                <section id="culture" className="py-20 px-4 bg-gradient-to-br from-gray-900 to-indigo-900">
+                <section id="culture" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-900 to-indigo-900">
                     <div className="max-w-6xl mx-auto text-center">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('careersCultureTitle')}</h2>
-                        <p className="text-gray-400 max-w-3xl mx-auto mb-12">{t('careersCultureSubtitle')}</p>
-                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">{t('careersCultureTitle')}</h2>
+                        <p className="text-gray-300 sm:text-gray-400 text-sm sm:text-base max-w-3xl mx-auto mb-8 sm:mb-12 px-4">{t('careersCultureSubtitle')}</p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 text-left">
                             <FeatureCard icon={<Users className="w-8 h-8 text-cyan-400" />} title={t('careersThrivingCultureTitle')} description={t('careersThrivingCultureDesc')} />
                             <FeatureCard icon={<TrendingUp className="w-8 h-8 text-cyan-400" />} title={t('careersCareerGrowthTitle')} description={t('careersCareerGrowthDesc')} />
                             <FeatureCard icon={<BookOpen className="w-8 h-8 text-cyan-400" />} title={t('careersContinuousLearningTitle')} description={t('careersContinuousLearningDesc')} />
@@ -746,44 +746,44 @@ export default function CareersPage() {
                 </section>
                 
                 {/* Work Environment Section */}
-                <section className="py-20 px-4 bg-gradient-to-br from-indigo-900 to-purple-900">
-                    <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-                        <div className="pr-8">
-                            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('careersEnvironmentTitle')}</h2>
-                            <p className="text-gray-300 mb-4 text-lg">{t('careersEnvironmentSubtitle')}</p>
-                            <ul className="space-y-3 text-gray-300">
+                <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-indigo-900 to-purple-900">
+                    <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center">
+                        <div className="md:pr-8">
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">{t('careersEnvironmentTitle')}</h2>
+                            <p className="text-gray-200 sm:text-gray-300 mb-6 text-sm sm:text-base lg:text-lg">{t('careersEnvironmentSubtitle')}</p>
+                            <ul className="space-y-3 sm:space-y-4 text-gray-200 sm:text-gray-300 text-sm sm:text-base">
                                 <li className="flex items-start">
-                                    <span className="text-cyan-400 mr-3 mt-1">✓</span>
-                                    <span><strong>{t('careersCollaborativeSpacesTitle')}</strong> {t('careersCollaborativeSpacesDesc')}</span>
+                                    <span className="text-cyan-400 mr-3 mt-1 text-lg sm:text-xl font-bold flex-shrink-0">✓</span>
+                                    <span><strong className="text-white">{t('careersCollaborativeSpacesTitle')}</strong> {t('careersCollaborativeSpacesDesc')}</span>
                                 </li>
                                 <li className="flex items-start">
-                                    <span className="text-cyan-400 mr-3 mt-1">✓</span>
-                                    <span><strong>{t('careersFlexibleWorkTitle')}</strong> {t('careersFlexibleWorkDesc')}</span>
+                                    <span className="text-cyan-400 mr-3 mt-1 text-lg sm:text-xl font-bold flex-shrink-0">✓</span>
+                                    <span><strong className="text-white">{t('careersFlexibleWorkTitle')}</strong> {t('careersFlexibleWorkDesc')}</span>
                                 </li>
                                 <li className="flex items-start">
-                                    <span className="text-cyan-400 mr-3 mt-1">✓</span>
-                                    <span><strong>{t('careersModernToolsTitle')}</strong> {t('careersModernToolsDesc')}</span>
+                                    <span className="text-cyan-400 mr-3 mt-1 text-lg sm:text-xl font-bold flex-shrink-0">✓</span>
+                                    <span><strong className="text-white">{t('careersModernToolsTitle')}</strong> {t('careersModernToolsDesc')}</span>
                                 </li>
                                 <li className="flex items-start">
-                                    <span className="text-cyan-400 mr-3 mt-1">✓</span>
-                                    <span><strong>{t('careersInnovationDaysTitle')}</strong> {t('careersInnovationDaysDesc')}</span>
+                                    <span className="text-cyan-400 mr-3 mt-1 text-lg sm:text-xl font-bold flex-shrink-0">✓</span>
+                                    <span><strong className="text-white">{t('careersInnovationDaysTitle')}</strong> {t('careersInnovationDaysDesc')}</span>
                                 </li>
                             </ul>
                         </div>
-                        <div className="relative">
-                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop" alt="Collaborative work environment" className="rounded-xl shadow-2xl object-cover w-full h-full" />
-                            <div className="absolute -bottom-5 -right-5 bg-cyan-500 text-white p-4 rounded-lg shadow-lg">
-                                <Zap className="w-8 h-8" />
+                        <div className="relative mt-8 md:mt-0">
+                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop" alt="Collaborative work environment" className="rounded-xl shadow-2xl object-cover w-full h-64 sm:h-80 md:h-96" />
+                            <div className="absolute -bottom-3 -right-3 sm:-bottom-5 sm:-right-5 bg-cyan-500 text-white p-3 sm:p-4 rounded-lg shadow-lg">
+                                <Zap className="w-6 h-6 sm:w-8 sm:h-8" />
                             </div>
                         </div>
                     </div>
                 </section>
 
                 {/* Testimonials Section */}
-                <section className="py-20 px-4 bg-gradient-to-br from-purple-900 to-indigo-900">
+                <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-900 to-indigo-900">
                     <div className="max-w-6xl mx-auto">
-                        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">{t('careersTestimonialsTitle')}</h2>
-                        <div className="grid md:grid-cols-3 gap-8">
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-8 sm:mb-12 text-white">{t('careersTestimonialsTitle')}</h2>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
                             {testimonials.map((testimonial, index) => (
                                 <TestimonialCard key={index} testimonial={testimonial} />
                             ))}
@@ -903,14 +903,14 @@ export default function CareersPage() {
                             </div>
                             <p className="text-gray-400 mb-6 max-w-md">{t('careersFooterTagline')}</p>
                             <div className="flex space-x-4">
-                                <a href="#" className="bg-gray-800 p-3 rounded-full hover:bg-cyan-600 transition-colors duration-300 transform hover:scale-110">
+                                <a href="#" target="_blank" rel="noopener noreferrer" className="bg-gray-800 p-3 rounded-full hover:bg-blue-600 transition-colors duration-300 transform hover:scale-110">
+                                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                                </a>
+                                <a href="#" target="_blank" rel="noopener noreferrer" className="bg-gray-800 p-3 rounded-full hover:bg-cyan-600 transition-colors duration-300 transform hover:scale-110">
                                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
                                 </a>
-                                <a href="#" className="bg-gray-800 p-3 rounded-full hover:bg-blue-600 transition-colors duration-300 transform hover:scale-110">
+                                <a href="https://www.linkedin.com/company/salesence/" target="_blank" rel="noopener noreferrer" className="bg-gray-800 p-3 rounded-full hover:bg-blue-600 transition-colors duration-300 transform hover:scale-110">
                                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
-                                </a>
-                                <a href="#" className="bg-gray-800 p-3 rounded-full hover:bg-pink-600 transition-colors duration-300 transform hover:scale-110">
-                                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.042-3.441.219-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.567-.994 3.993-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.017 12.014 0 12.017 0z"></path></svg>
                                 </a>
                             </div>
                         </div>
@@ -961,10 +961,10 @@ export default function CareersPage() {
 
 // Helper Components
 const FeatureCard = ({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) => (
-    <div className="bg-gray-800/50 backdrop-blur-md p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-700 group">
-        <div className="mb-4 inline-block bg-cyan-900/30 p-3 rounded-full group-hover:scale-110 transition-transform duration-300">{icon}</div>
-        <h3 className="text-xl font-bold mb-2 group-hover:text-cyan-400 transition-colors">{title}</h3>
-        <p className="text-gray-400">{description}</p>
+    <div className="bg-gray-800/50 backdrop-blur-md p-4 sm:p-6 rounded-lg sm:rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-700 group h-full">
+        <div className="mb-3 sm:mb-4 inline-block bg-cyan-900/30 p-2 sm:p-3 rounded-full group-hover:scale-110 transition-transform duration-300">{icon}</div>
+        <h3 className="text-lg sm:text-xl font-bold mb-2 text-white group-hover:text-cyan-400 transition-colors">{title}</h3>
+        <p className="text-gray-300 sm:text-gray-400 text-sm sm:text-base">{description}</p>
     </div>
 );
 
@@ -972,25 +972,23 @@ const JobCard = ({ job, isOpen, onToggle, onApply }: { job: JobOpening, isOpen: 
     const { t } = useTranslation();
     return (
     <div className="bg-gray-800/50 backdrop-blur-md rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-700">
-        <button onClick={onToggle} className="w-full text-left p-6 flex justify-between items-center hover:bg-gray-700/30 transition-colors">
-            <div className="flex-grow">
-                <div className="flex items-start justify-between">
-                    <div>
-                        <h3 className="text-xl font-bold text-cyan-400">{job.title}</h3>
-                        <div className="flex flex-wrap items-center text-gray-400 mt-2 gap-x-4 gap-y-1 text-sm">
-                            <span className="flex items-center"><Briefcase className="w-4 h-4 mr-1.5" />{job.department}</span>
-                            <span className="flex items-center"><MapPin className="w-4 h-4 mr-1.5" />{job.location}</span>
-                            <span className="flex items-center bg-cyan-900/30 text-cyan-400 px-2 py-1 rounded-full text-xs">{job.type}</span>
-                        </div>
+        <button onClick={onToggle} className="w-full text-left p-4 sm:p-6 hover:bg-gray-700/30 transition-colors">
+            <div className="flex items-start justify-between gap-4">
+                <div className="flex-grow min-w-0">
+                    <h3 className="text-lg sm:text-xl font-bold text-cyan-400 mb-2">{job.title}</h3>
+                    <div className="flex flex-wrap items-center text-gray-400 gap-x-3 sm:gap-x-4 gap-y-2 text-xs sm:text-sm">
+                        <span className="flex items-center flex-shrink-0"><Briefcase className="w-4 h-4 mr-1.5 flex-shrink-0" />{job.department}</span>
+                        <span className="flex items-center flex-shrink-0"><MapPin className="w-4 h-4 mr-1.5 flex-shrink-0" />{job.location}</span>
+                        <span className="flex items-center bg-cyan-900/30 text-cyan-400 px-2 py-1 rounded-full text-xs flex-shrink-0">{job.type}</span>
                     </div>
-                    <div className="flex items-center text-sm text-gray-400">
-                        <Calendar className="w-4 h-4 mr-1" />
-                        {job.postedDate}
+                    <div className="flex items-center text-xs sm:text-sm text-gray-400 mt-3">
+                        <Calendar className="w-4 h-4 mr-1.5 flex-shrink-0" />
+                        <span>{job.postedDate}</span>
                     </div>
                 </div>
-            </div>
-            <div className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
-                <ChevronDown className="w-6 h-6 text-gray-400" />
+                <div className={`transform transition-transform duration-300 flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`}>
+                    <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400" />
+                </div>
             </div>
         </button>
         {isOpen && (

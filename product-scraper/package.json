@@ -1,0 +1,22 @@
+{
+  "name": "product-scraper-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"pnpm --filter api dev\"",
+    "build": "pnpm -r build",
+    "db:push": "pnpm --filter @scraper/db db:push",
+    "db:studio": "pnpm --filter @scraper/db db:studio"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "concurrently": "^8.2.2",
+    "prettier": "^3.1.1",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "pg": "^8.16.3"
+  }
+}

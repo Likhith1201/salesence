@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat \"/d/salesenceeee/salesenceeee/src/App.tsx\")",
+      "Bash(cat \"/d/salesenceeee/salesenceeee/src/main.tsx\")",
+      "Bash(cat \"/d/salesenceeee/salesenceeee/README.md\")",
+      "Bash(cat \"/d/salesenceeee/salesenceeee/src/types/api.types.ts\")",
+      "Bash(cat \"/d/salesenceeee/salesenceeee/src/contexts/AuthContext.tsx\")",
+      "Bash(cat \"/d/salesenceeee/salesenceeee/src/pages/Index.tsx\")",
+      "Bash(cat \"/d/salesenceeee/salesenceeee/src/utils/apiTransformer.ts\")",
+      "Bash(cat \"/d/salesenceeee/salesenceeee/src/utils/mockDataGenerator.ts\")",
+      "Bash(cat \"/d/salesenceeee/salesenceeee/src/pages/ProductDetailsPage.tsx\")",
+      "Bash(cat \"/d/salesenceeee/salesenceeee/src/hooks/useAutoTranslate.ts\")",
+      "Bash(cat \"/d/salesenceeee/salesenceeee/src/pages/Login.tsx\")",
+      "Bash(cat \"/d/salesenceeee/salesenceeee/index.html\")",
+      "Bash(cat \"/d/salesenceeee/salesenceeee/src/components/landing/HeroSection.tsx\")",
+      "Bash(cat \"/d/salesenceeee/salesenceeee/src/components/landing/DemoSection.tsx\")",
+      "Bash(cat \"/d/salesenceeee/salesenceeee/.env\")",
+      "Bash(sed:*)",
+      "Bash(npm run build:*)",
+      "Bash(rm:*)",
+      "Bash(__NEW_LINE__ echo \"Added basePrice to defaultPlan\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
