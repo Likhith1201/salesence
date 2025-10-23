@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: salesence-backend        # friendly Render service name
+    env: node
+    region: oregon                 # closest to your US West users
+    plan: starter
+    branch: main
+    buildCommand: >
+      cd product-scraper &&
+      pnpm install &&
+      pnpm --filter @scraper/db db:generate &&
+      pnpm -r --filter packages/scraper-core build &&
+      pnpm -r --filter packages/db build &&
+      pnpm --filter apps/api build
+    startCommand: cd product-scraper/apps/api && pnpm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: DATABASE_URL
+        value: "postgresql://postgres.cyimsigwvzmoyvqzzcjt:Emrhn.27@aws-0-ap-south-1.pooler.supabase.com:5432/postgres"
