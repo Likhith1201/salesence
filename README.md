@@ -325,4 +325,5 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 ## Contact
 
-Project maintained by *Bhagyaholkade*. If you have questions, suggestions or issues, feel free to reach out / open an issue.
+Project maintained by [Bhagyaholkade](https://github.com/Bhagyaholkade) and [Likhith Pullela](https://github.com/Likhith1201).  
+If you have questions, suggestions, or issues, feel free to reach out or open an issue.
