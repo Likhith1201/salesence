@@ -1,0 +1,11 @@
+{
+  // This file defines the relationship between the project references
+  // (the individual packages) in monorepo.
+  "files": [],
+  "references": [
+    { "path": "packages/db" },
+    { "path": "packages/scraper-core" },
+    // Assuming 'api' is also a TypeScript project
+    { "path": "packages/api" } 
+  ]
+}
