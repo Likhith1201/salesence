@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "concurrently \"pnpm --filter api dev\"",
-    "build": "pnpm --filter @scraper/db build && pnpm --filter @scraper/scraper-core build && pnpm --filter api build",
+    "build": "tsc --build",
     "start:prod": "pnpm --filter api start",
     "db:push": "pnpm --filter @scraper/db db:push",
     "db:studio": "pnpm --filter @scraper/db db:studio"
