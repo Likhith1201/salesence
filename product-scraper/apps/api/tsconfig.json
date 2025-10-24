@@ -6,8 +6,8 @@
     "outDir": "dist"
   },
   "references": [
-    { "path": "../../packages/scraper-core" },
-    { "path": "../../packages/db" }
+    { "path": "../../packages/db" },
+    { "path": "../../packages/scraper-core" }
   ],
   "include": ["src/**/*"]
 }

@@ -6,6 +6,6 @@
     { "path": "packages/db" },
     { "path": "packages/scraper-core" },
     // Assuming 'api' is also a TypeScript project
-    { "path": "packages/api" } 
+    { "path": "apps/api" } 
   ]
 }
