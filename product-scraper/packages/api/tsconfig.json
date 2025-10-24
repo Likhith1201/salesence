@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    // The API layer typically depends on both db and scraper-core
+    "composite": true,
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "references": [
+    { "path": "../db" },
+    { "path": "../scraper-core" }
+  ],
+  "include": ["src/**/*"]
+}
