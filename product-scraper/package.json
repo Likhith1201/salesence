@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "concurrently \"pnpm --filter api dev\"",
     "build": "tsc --build --clean && tsc --build",
-    "start:prod": "pnpm --filter api start",
+    "start:prod": "node apps/api/dist/server.js",
     "db:push": "pnpm --filter @scraper/db db:push",
     "db:studio": "pnpm --filter @scraper/db db:studio"
   },
