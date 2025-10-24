@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "concurrently \"pnpm --filter api dev\"",
     "build": "pnpm -r build",
+    "start:prod": "pnpm --filter api start",
     "db:push": "pnpm --filter @scraper/db db:push",
     "db:studio": "pnpm --filter @scraper/db db:studio"
   },
