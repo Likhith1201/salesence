@@ -11,7 +11,17 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    
+    // --- START: CRITICAL ADDITIONS FOR MONOREPO ALIASES ---
+    "baseUrl": ".",
+    "paths": {
+      // This tells TS to look in the 'src' and 'dist' folders of the
+      // corresponding package (e.g., @scraper/db maps to packages/db/dist)
+      "@scraper/*": ["packages/*/src", "packages/*/dist"]
+    }
+    // --- END: CRITICAL ADDITIONS FOR MONOREPO ALIASES ---
+
   },
   "exclude": ["node_modules","dist"]
 }
