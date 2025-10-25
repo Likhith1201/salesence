@@ -10,18 +10,23 @@ import { config } from '@scraper/scraper-core';
 
 // --- START CORRECTED CORS LOGIC ---
 
-// Define local development origins
-const localOrigins = ['http://localhost:5173', 'http://localhost:3000'];
+// Define local development origins for comprehensive local testing
+const localOrigins = ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:8080'];
 
 // Define production origins:
-// Reads the comma-separated string from the environment variable (e.g., "https://site1.com,https://site2.com")
-// and splits it into a proper array of strings.
-const productionOrigins: string[] = process.env.FRONTEND_ORIGIN
-    ? process.env.FRONTEND_ORIGIN.split(',').map(s => s.trim())
-    : []; // Safe default: allow no origins if variable is missing
+// NOTE: For this to work in production, the FRONTEND_ORIGIN environment variable
+// MUST be set on Render to your Vercel URL:
+// e.g., "https://salesence-git-main-likhith-pullelas-projects.vercel.app"
+const productionOrigins = (process.env.FRONTEND_ORIGIN || '')
+    .split(',')
+    .map(s => s.trim())
+    .filter(s => s.length > 0); // Filter out empty strings if the variable is not set
 
 // Set the final list of allowed origins based on environment
-const allowedOrigins: string[] = process.env.NODE_ENV === 'production'
+// In production, we strictly use the environment variable list.
+// If the variable isn't set (i.e., productionOrigins.length is 0), it will be an empty array,
+// effectively blocking all traffic until the user sets the variable.
+const allowedOrigins = (process.env.NODE_ENV === 'production' && productionOrigins.length > 0)
     ? productionOrigins
     : localOrigins;
 
@@ -30,9 +35,9 @@ const allowedOrigins: string[] = process.env.NODE_ENV === 'production'
 const app = express();
 app.use(helmet());
 
-// Use the corrected dynamic CORS configuration
+// Apply the dynamic CORS configuration
 app.use(cors({
-    origin: allowedOrigins, // Now an array of single domain strings in production
+    origin: allowedOrigins, // Now an array of single domain strings
     credentials: true,
     methods: ['GET', 'POST', 'OPTIONS', 'HEAD'], // Ensure necessary methods are allowed
 }));
@@ -47,3 +52,9 @@ app.use(notFoundHandler);
 app.use(errorHandler);
 
 app.listen(config.port, () => logger.info(`API on :${config.port}`));
+
+// CRITICAL ACTION:
+// After saving this file, you must go to your Render Backend Service Dashboard
+// and set the following Environment Variable:
+// Key: FRONTEND_ORIGIN
+// Value: https://salesence-git-main-likhith-pullelas-projects.vercel.app
