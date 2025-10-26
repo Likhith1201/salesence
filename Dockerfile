@@ -1,8 +1,12 @@
-# Use the official Node.js image with pnpm included for stability
-FROM node:22-bullseye-pnpm as base
+# Use the official Node.js image (we will install pnpm manually)
+FROM node:22-bullseye as base
 
 # Set the working directory for all subsequent commands
 WORKDIR /usr/src/app
+
+# --- FIX: Install pnpm globally since the base image doesn't include it ---
+# The previous image tag 'node:22-bullseye-pnpm' was invalid.
+RUN npm install -g pnpm
 
 # --- STEP 1: Install Playwright's Linux System Dependencies ---
 # These are required to run the headless browser
@@ -30,8 +34,6 @@ COPY . .
 # --- STEP 4: Build the application ---
 # We use 'pnpm exec' for reliability with pnpm installed binaries in a Docker environment.
 # We explicitly set the path to the Prisma schema for the monorepo structure.
-# The `npm run build` step uses the monorepo's root package.json, which is correct.
-# FIX: Use 'pnpm exec' instead of './node_modules/.bin/'
 RUN pnpm exec playwright install chromium && \
     pnpm exec prisma generate --schema ./packages/db/prisma/schema.prisma && \
     npm run build
