@@ -1,13 +1,11 @@
-# Use a robust Node base image that supports Playwright dependencies
-FROM node:22-bullseye-slim
+# Use the official Node.js image with pnpm included for stability
+FROM node:22-bullseye-pnpm as base
 
-# Install pnpm globally
-RUN npm install -g pnpm
-
-# Set the working directory
+# Set the working directory for all subsequent commands
 WORKDIR /usr/src/app
 
-# --- STEP 1: Install Playwright's Linux System Dependencies (PASSED) ---
+# --- STEP 1: Install Playwright's Linux System Dependencies ---
+# These are required to run the headless browser
 RUN apt-get update && apt-get install -y \
     libnss3 libatk-bridge2.0-0 libxshmfence-dev libgbm-dev libasound2 \
     libatk1.0-0 libcups2 libgconf-2-4 libgtk-3-0 \
@@ -15,18 +13,42 @@ RUN apt-get update && apt-get install -y \
     libjpeg62-turbo \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy all files into the container
-COPY . .
+# --- STEP 2: Copy package files and install dependencies ---
+# Copy just the necessary files for dependency installation (for layer caching)
+COPY package.json pnpm-lock.yaml ./
+COPY product-scraper/package.json ./product-scraper/
+COPY product-scraper/packages/db/package.json ./product-scraper/packages/db/
+COPY product-scraper/packages/scraper-core/package.json ./product-scraper/packages/scraper-core/
+COPY product-scraper/apps/api/package.json ./product-scraper/apps/api/
 
-# --- STEP 2: Install Node Dependencies ---
+# The --shamefully-hoist flag is often needed in monorepos where packages rely on hoisted dependencies
 RUN pnpm install --shamefully-hoist --no-frozen-lockfile
 
-# --- STEP 3: Execute Binaries & Build (FIXED) ---
-# We use the full path ./node_modules/.bin/ for Playwright and Prisma 
-# to bypass pnpm's path resolution issues.
-RUN ./node_modules/.bin/playwright install chromium && \
-    ./node_modules/.bin/prisma generate --schema ./packages/db/prisma/schema.prisma && \
+# --- STEP 3: Copy the rest of the application code ---
+COPY . .
+
+# --- STEP 4: Build the application ---
+# We use 'pnpm exec' for reliability with pnpm installed binaries in a Docker environment.
+# We explicitly set the path to the Prisma schema for the monorepo structure.
+# The `npm run build` step uses the monorepo's root package.json, which is correct.
+# FIX: Use 'pnpm exec' instead of './node_modules/.bin/'
+RUN pnpm exec playwright install chromium && \
+    pnpm exec prisma generate --schema ./packages/db/prisma/schema.prisma && \
     npm run build
 
-# Start the production server using your npm script
-CMD ["npm", "run", "start:prod"]
+# --- STEP 5: Run the production server ---
+# Use the smaller, production-ready image
+FROM node:22-bullseye-slim
+
+# Copy the system libraries installed in the first stage
+COPY --from=base /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu
+
+# Copy the application code from the build stage
+WORKDIR /usr/src/app
+COPY --from=base /usr/src/app .
+
+# Expose the port (e.g., 3000 as configured in server.ts)
+EXPOSE 3000
+
+# Start the application using the correct script defined in product-scraper/package.json
+CMD [ "pnpm", "start:prod" ]
