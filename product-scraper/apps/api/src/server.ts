@@ -16,16 +16,13 @@ const localOrigins = ['http://localhost:5173', 'http://localhost:3000', 'http://
 // Define production origins:
 // NOTE: For this to work in production, the FRONTEND_ORIGIN environment variable
 // MUST be set on Render to your Vercel URL:
-// e.g., "https://salesence-git-main-likhith-pullelas-projects.vercel.app"
+// e.g., "https://salesence.vercel.app"
 const productionOrigins = (process.env.FRONTEND_ORIGIN || '')
     .split(',')
     .map(s => s.trim())
     .filter(s => s.length > 0); // Filter out empty strings if the variable is not set
 
 // Set the final list of allowed origins based on environment
-// In production, we strictly use the environment variable list.
-// If the variable isn't set (i.e., productionOrigins.length is 0), it will be an empty array,
-// effectively blocking all traffic until the user sets the variable.
 const allowedOrigins = (process.env.NODE_ENV === 'production' && productionOrigins.length > 0)
     ? productionOrigins
     : localOrigins;
@@ -46,6 +43,9 @@ app.use(express.json());
 app.use(pinoHttp({ logger }));
 
 app.use('/health', health);
+
+// CRITICAL STEP: The actual fix for the 500 error must be inside the handler
+// imported by this line (in './routes/analyze').
 app.use('/analyze', analyze);
 
 app.use(notFoundHandler);
@@ -57,4 +57,4 @@ app.listen(config.port, () => logger.info(`API on :${config.port}`));
 // After saving this file, you must go to your Render Backend Service Dashboard
 // and set the following Environment Variable:
 // Key: FRONTEND_ORIGIN
-// Value: https://salesence-git-main-likhith-pullelas-projects.vercel.app
+// Value: https://salesence.vercel.app

@@ -10,6 +10,9 @@ const log = createLogger('analyze');
 
 router.post('/', async (req,res,next)=>{
   const started = Date.now();
+  // Log the incoming body for debugging
+  log.info({ body: req.body }, '[POST /] Request received'); 
+
   try{
     const parsed = schema.parse(req.body);
     const r1 = await scrapeProduct(parsed.url, 'req-'+started);
@@ -34,7 +37,13 @@ router.post('/', async (req,res,next)=>{
     };
     log.info({tookMs: response.meta.tookMs, recs: response.recommendations.length}, 'done');
     res.json(response);
-  }catch(e){ next(e); }
+  }catch(e){
+    // --- CRITICAL FIX: EXPLICITLY LOG THE FULL ERROR STACK ---
+    // This ensures the Render logs will contain the crash details (Playwright/dependency error).
+    log.error({ error: e, requestBody: req.body }, 'CRITICAL ANALYSIS CRASH: Check stack trace below.');
+    // Pass the error to the general Express error handler (as you were doing before)
+    next(e); 
+  }
 });
 
 export default router;
