@@ -7,7 +7,7 @@ RUN npm install -g pnpm
 # Set the working directory
 WORKDIR /usr/src/app
 
-# --- STEP 1: Install Playwright's Linux System Dependencies (SUCCESSFUL) ---
+# --- STEP 1: Install Playwright's Linux System Dependencies (PASSED) ---
 RUN apt-get update && apt-get install -y \
     libnss3 libatk-bridge2.0-0 libxshmfence-dev libgbm-dev libasound2 \
     libatk1.0-0 libcups2 libgconf-2-4 libgtk-3-0 \
@@ -18,13 +18,13 @@ RUN apt-get update && apt-get install -y \
 # Copy all files into the container
 COPY . .
 
-# --- STEP 2: Install Node Dependencies AND Playwright Browser (FIXED) ---
-# 1. pnpm install: Installs all packages including Playwright core
+# --- STEP 2: Install Node Dependencies ---
 RUN pnpm install --shamefully-hoist --no-frozen-lockfile
 
-# 2. Sequential commands: Now that pnpm install is complete, 
-#    the shell context can reliably find 'playwright' and 'prisma'.
-RUN pnpm exec playwright install chromium && \
+# --- STEP 3: Execute Binaries & Build (FIXED) ---
+# We use the full path ./node_modules/.bin/ for Playwright and Prisma 
+# to bypass pnpm's path resolution issues.
+RUN ./node_modules/.bin/playwright install chromium && \
     ./node_modules/.bin/prisma generate --schema ./packages/db/prisma/schema.prisma && \
     npm run build
 
